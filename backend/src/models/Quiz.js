@@ -1,5 +1,24 @@
 import mongoose from "mongoose";
 
+const questionSchema = mongoose.Schema({
+  questionText: {
+    type: String,
+    required: true,
+  },
+  options: {
+    type: [String],
+    required: true,
+  },
+  correctAnswer: {
+    type: String,
+    required: true,
+  },
+  timeLimit: {
+    type: Number,
+    default: 15,
+  },
+});
+
 const quizScheme = mongoose.Schema(
   {
     title: {
@@ -22,9 +41,11 @@ const quizScheme = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    questions: [questionSchema],
   },
   {
-    timestamp: true,
+    timestamps: true,
   }
 );
+const Quiz = mongoose.model("Quiz", quizScheme);
 export default Quiz;

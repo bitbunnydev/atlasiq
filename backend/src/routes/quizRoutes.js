@@ -1,9 +1,17 @@
 import express from "express";
-import { getQuizs } from "../controllers/quizController.js";
+import {
+  createQuiz,
+  deleteQuiz,
+  getQuiz,
+  updateQuiz,
+} from "../controllers/quizController.js";
 
 const router = express.Router();
 
 //routes
-router.get("api/", getQuizs);
+router.get("/", getQuiz);
+router.get("/", createQuiz);
+router.get("/:id", updateQuiz);
+router.get("/:id", deleteQuiz);
 
 export default router;
