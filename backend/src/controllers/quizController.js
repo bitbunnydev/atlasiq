@@ -1,6 +1,11 @@
 import Quiz from "../models/Quiz.js";
 
-export async function getQuiz(req, res) {
+export async function getAllQuiz(req, res) {
+  try {
+  } catch (error) {}
+}
+
+export async function getQuizById(req, res) {
   try {
   } catch (error) {}
 }
