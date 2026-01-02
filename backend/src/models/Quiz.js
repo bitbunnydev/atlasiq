@@ -21,6 +21,10 @@ const questionSchema = mongoose.Schema({
 
 const quizScheme = mongoose.Schema(
   {
+    subject: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -29,11 +33,19 @@ const quizScheme = mongoose.Schema(
       type: String,
       required: true,
     },
-    creator: {
+    category: {
       type: String,
       required: true,
     },
-    category: {
+    grades: {
+      type: String,
+      required: true,
+    },
+    access: {
+      type: String,
+      required: true,
+    },
+    creator: {
       type: String,
       required: true,
     },
