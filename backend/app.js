@@ -9,8 +9,8 @@ const app = express();
 //middleware
 app.use(express.json());
 //routes
+app.use("/api/auth", authRoutes);
 app.use("/api/quiz", quizRoutes);
 app.use("/api/note", noteRoutes);
-app.use("/api/user", authRoutes);
 
 export default app;

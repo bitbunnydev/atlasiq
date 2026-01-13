@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
 const questionSchema = mongoose.Schema({
   questionText: {
@@ -10,7 +10,7 @@ const questionSchema = mongoose.Schema({
     required: true,
   },
   correctAnswer: {
-    type: String,
+    type: Number,
     required: true,
   },
   timeLimit: {
@@ -29,7 +29,7 @@ const quizScheme = mongoose.Schema(
       type: String,
       required: true,
     },
-    quizDesc: {
+    description: {
       type: String,
       required: true,
     },
@@ -44,9 +44,11 @@ const quizScheme = mongoose.Schema(
     access: {
       type: String,
       required: true,
+      enum: ["public", "private", "invite-only"],
     },
     creator: {
-      type: String,
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     quizAttempts: {
