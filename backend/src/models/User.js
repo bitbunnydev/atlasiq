@@ -10,6 +10,10 @@ const userScheme = mongoose.Schema(
       type: String,
       required: true,
     },
+    birthDate: {
+      type: Date,
+      required: true,
+    },
     username: {
       type: String,
       required: true,

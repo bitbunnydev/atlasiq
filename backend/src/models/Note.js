@@ -5,9 +5,19 @@ const noteScheme = mongoose.Schema(
     noteTitle: {
       type: String,
       required: true,
+      trim: true,
     },
     noteDesc: {
       type: String,
+      default: "",
+    },
+    subject: {
+      type: String,
+      required: true,
+    },
+    grade: {
+      type: String,
+      enum: ["Primary", "Secondary", "Univ"],
     },
     pdfFile: {
       type: String,

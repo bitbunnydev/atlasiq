@@ -1,4 +1,5 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
+import { autoGenerateAccessCode } from "../hooks/quizHooks.js";
 
 const questionSchema = mongoose.Schema({
   questionText: {
@@ -19,7 +20,7 @@ const questionSchema = mongoose.Schema({
   },
 });
 
-const quizScheme = mongoose.Schema(
+const quizSchema = mongoose.Schema(
   {
     subject: {
       type: String,
@@ -40,14 +41,21 @@ const quizScheme = mongoose.Schema(
     grades: {
       type: String,
       required: true,
+      enum: ["Primary", "Secondary", "Univ"],
     },
     access: {
       type: String,
       required: true,
-      enum: ["public", "private", "invite-only"],
+      enum: ["Public", "Private", "Invite-code"],
+    },
+    accessCode: {
+      type: String,
+      required: function () {
+        return this.access === "Invite-code";
+      },
     },
     creator: {
-      type: Mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -61,5 +69,9 @@ const quizScheme = mongoose.Schema(
     timestamps: true,
   }
 );
-const Quiz = mongoose.model("Quiz", quizScheme);
+
+//Attach Hook
+quizSchema.pre("validate", autoGenerateAccessCode);
+
+const Quiz = mongoose.model("Quiz", quizSchema);
 export default Quiz;
